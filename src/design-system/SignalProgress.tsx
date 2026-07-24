@@ -20,7 +20,7 @@ export function SignalProgress({ label, value, percent, tone = "signal", classNa
 
   return (
     <div className={`space-y-2 ${className}`}>
-      <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.14em]">
+      <div className="flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.14em]">
         <span className="truncate text-neutral-500">{label}</span>
         <span className="shrink-0 text-neutral-300">{value}</span>
       </div>

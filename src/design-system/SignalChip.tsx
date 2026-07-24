@@ -17,7 +17,7 @@ const toneClass: Record<SignalChipTone, string> = {
 
 export function SignalChip({ children, className = "", tone = "quiet" }: SignalChipProps) {
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] ${toneClass[tone]} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.12em] ${toneClass[tone]} ${className}`}>
       {children}
     </span>
   );

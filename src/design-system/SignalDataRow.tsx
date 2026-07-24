@@ -17,7 +17,7 @@ export function SignalDataRow({ label, description, leading, meta, trailing, cla
         <div className="truncate text-sm font-medium text-neutral-200">{label}</div>
         {description && <div className="mt-0.5 truncate text-xs text-neutral-500">{description}</div>}
       </div>
-      {meta && <div className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.12em] text-neutral-500 sm:block">{meta}</div>}
+      {meta && <div className="hidden shrink-0 font-mono text-xs uppercase tracking-[0.12em] text-neutral-500 sm:block">{meta}</div>}
       {trailing && <div className="shrink-0">{trailing}</div>}
     </div>
   );
