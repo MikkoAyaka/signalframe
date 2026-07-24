@@ -46,9 +46,9 @@ export function CodeBlock({ code, language = "tsx", label }: { code: string; lan
   }, [code, language]);
 
   return (
-    <div className="sf-code-block">
+    <div className="sparx-code-block">
       {label && <div className="border-b border-white/[0.07] px-5 py-2 font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">{label}</div>}
-      {html ? <div className="sf-shiki" dangerouslySetInnerHTML={{ __html: html }} /> : <pre className="overflow-x-auto px-5 py-4 font-mono text-xs leading-6 text-neutral-400"><code>{code}</code></pre>}
+      {html ? <div className="sparx-shiki" dangerouslySetInnerHTML={{ __html: html }} /> : <pre className="overflow-x-auto px-5 py-4 font-mono text-xs leading-6 text-neutral-400"><code>{code}</code></pre>}
     </div>
   );
 }

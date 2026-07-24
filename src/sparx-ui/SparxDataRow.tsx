@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 
-interface SignalDataRowProps {
+interface SparxDataRowProps {
   label: ReactNode;
   description?: ReactNode;
   leading?: ReactNode;
@@ -9,7 +9,7 @@ interface SignalDataRowProps {
   className?: string;
 }
 
-export function SignalDataRow({ label, description, leading, meta, trailing, className = "" }: SignalDataRowProps) {
+export function SparxDataRow({ label, description, leading, meta, trailing, className = "" }: SparxDataRowProps) {
   return (
     <div className={`flex min-w-0 items-center gap-3 border-b border-white/[0.06] py-3 last:border-b-0 ${className}`}>
       {leading && <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-neutral-300">{leading}</div>}

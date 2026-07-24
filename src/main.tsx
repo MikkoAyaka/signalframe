@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { DesignSystemApp } from "./DesignSystemApp";
+import { SparxUiApp } from "./SparxUiApp";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(<DesignSystemApp />);
+createRoot(document.getElementById("root")!).render(<SparxUiApp />);

@@ -3,4 +3,4 @@ import { resolve } from "node:path";
 
 const outputDirectory = resolve("lib");
 await mkdir(outputDirectory, { recursive: true });
-await cp(resolve("src/design-system/tokens.css"), resolve(outputDirectory, "tokens.css"));
+await cp(resolve("src/sparx-ui/tokens.css"), resolve(outputDirectory, "tokens.css"));

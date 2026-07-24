@@ -8,9 +8,9 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "outDir": "lib",
-    "rootDir": "src/design-system",
+    "rootDir": "src/sparx-ui",
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/design-system/**/*.ts", "src/design-system/**/*.tsx"]
+  "include": ["src/sparx-ui/**/*.ts", "src/sparx-ui/**/*.tsx"]
 }

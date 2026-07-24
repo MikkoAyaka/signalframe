@@ -1,11 +1,11 @@
 ---
-name: signalframe
-description: Apply Signalframe's dark interface system to React product interfaces. Use when implementing or refining information-dense views, selecting Signalframe primitives, translating Signalframe layouts and motion into an existing product, or reviewing a React interface for hierarchy, responsive behavior, and interaction quality.
+name: sparx-ui
+description: Apply Sparx UI's dark interface system to React product interfaces. Use when implementing or refining information-dense views, selecting Sparx UI primitives, translating Sparx UI layouts and motion into an existing product, or reviewing a React interface for hierarchy, responsive behavior, and interaction quality.
 ---
 
-# Signalframe
+# Sparx UI
 
-Use the system to make high-signal work easier to scan and act on. Preserve the target product's own identity unless the request explicitly calls for a full Signalframe restyle.
+Use the system to make high-signal work easier to scan and act on. Preserve the target product's own identity unless the request explicitly calls for a full Sparx UI restyle.
 
 ## Workflow
 

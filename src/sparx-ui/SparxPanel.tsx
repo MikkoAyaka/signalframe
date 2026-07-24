@@ -1,28 +1,28 @@
 import { useRef, useState, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 
-export type SignalPanelTone = "quiet" | "default" | "command";
+export type SparxPanelTone = "quiet" | "default" | "command";
 
-export interface SignalPanelProps {
+export interface SparxPanelProps {
   children: ReactNode;
   className?: string;
   glowColor?: string;
-  tone?: SignalPanelTone;
+  tone?: SparxPanelTone;
   interactive?: boolean;
 }
 
-const toneClass: Record<SignalPanelTone, string> = {
+const toneClass: Record<SparxPanelTone, string> = {
   quiet: "bg-neutral-950/45 border-white/[0.06]",
   default: "bg-neutral-900/55 border-white/[0.08]",
   command: "bg-neutral-900/70 border-red-500/25",
 };
 
-export function SignalPanel({
+export function SparxPanel({
   children,
   className = "",
   glowColor = "rgba(239, 68, 68, 0.16)",
   tone = "default",
   interactive = true,
-}: SignalPanelProps) {
+}: SparxPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState(false);

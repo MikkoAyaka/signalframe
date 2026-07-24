@@ -1,30 +1,30 @@
 # System contract
 
-Use this reference for every Signalframe task. It specifies the decisions that make the system coherent; adapt implementation details to the target application's stack.
+Use this reference for every Sparx UI task. It specifies the decisions that make the system coherent; adapt implementation details to the target application's stack.
 
 ## Tokens and surfaces
 
 ```css
 :root {
-  --sf-canvas: #09090b;
-  --sf-surface: rgba(23, 23, 23, 0.58);
-  --sf-surface-strong: rgba(23, 23, 23, 0.82);
-  --sf-line: rgba(255, 255, 255, 0.08);
-  --sf-line-signal: rgba(239, 68, 68, 0.3);
-  --sf-text: #fafafa;
-  --sf-text-muted: #a3a3a3;
-  --sf-text-quiet: #525252;
-  --sf-signal: #ef4444;
-  --sf-signal-soft: rgba(239, 68, 68, 0.16);
-  --sf-radius-panel: 1rem;
-  --sf-radius-control: 0.75rem;
-  --sf-shadow-panel: 0 22px 64px -24px rgba(0, 0, 0, 0.9);
-  --sf-shadow-signal: 0 0 36px -12px rgba(239, 68, 68, 0.32);
+  --sparx-canvas: #09090b;
+  --sparx-surface: rgba(23, 23, 23, 0.58);
+  --sparx-surface-strong: rgba(23, 23, 23, 0.82);
+  --sparx-line: rgba(255, 255, 255, 0.08);
+  --sparx-line-signal: rgba(239, 68, 68, 0.3);
+  --sparx-text: #fafafa;
+  --sparx-text-muted: #a3a3a3;
+  --sparx-text-quiet: #525252;
+  --sparx-signal: #ef4444;
+  --sparx-signal-soft: rgba(239, 68, 68, 0.16);
+  --sparx-radius-panel: 1rem;
+  --sparx-radius-control: 0.75rem;
+  --sparx-shadow-panel: 0 22px 64px -24px rgba(0, 0, 0, 0.9);
+  --sparx-shadow-signal: 0 0 36px -12px rgba(239, 68, 68, 0.32);
 }
 ```
 
 - Start with the canvas, a single raised surface plane, and content within that plane.
-- Use `--sf-line` for boundaries. Add `--sf-line-signal` only for an active decision, live state, or primary action.
+- Use `--sparx-line` for boundaries. Add `--sparx-line-signal` only for an active decision, live state, or primary action.
 - Use the red signal to convey meaning. Success and warning need a label or icon as well as color.
 - Prefer a tonal shift or border before a shadow. Avoid permanently glowing metrics, panels, and controls.
 

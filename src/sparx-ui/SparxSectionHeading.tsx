@@ -1,13 +1,13 @@
 import { type ReactNode } from "react";
 
-interface SignalSectionHeadingProps {
+interface SparxSectionHeadingProps {
   eyebrow?: string;
   title: string;
   description?: ReactNode;
   action?: ReactNode;
 }
 
-export function SignalSectionHeading({ eyebrow, title, description, action }: SignalSectionHeadingProps) {
+export function SparxSectionHeading({ eyebrow, title, description, action }: SparxSectionHeadingProps) {
   return (
     <div className="flex flex-col gap-4 border-b border-white/[0.08] pb-5 sm:flex-row sm:items-end sm:justify-between">
       <div>

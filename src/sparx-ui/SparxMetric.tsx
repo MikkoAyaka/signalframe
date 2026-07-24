@@ -1,24 +1,24 @@
 import { type ReactNode } from "react";
 
-export type SignalMetricTone = "default" | "signal" | "success" | "warning";
+export type SparxMetricTone = "default" | "signal" | "success" | "warning";
 
-interface SignalMetricProps {
+interface SparxMetricProps {
   label: string;
   value: ReactNode;
   delta?: ReactNode;
   detail?: ReactNode;
-  tone?: SignalMetricTone;
+  tone?: SparxMetricTone;
   className?: string;
 }
 
-const valueTone: Record<SignalMetricTone, string> = {
+const valueTone: Record<SparxMetricTone, string> = {
   default: "text-white",
   signal: "text-red-300",
   success: "text-emerald-300",
   warning: "text-amber-200",
 };
 
-export function SignalMetric({ label, value, delta, detail, tone = "default", className = "" }: SignalMetricProps) {
+export function SparxMetric({ label, value, delta, detail, tone = "default", className = "" }: SparxMetricProps) {
   return (
     <div className={`min-w-0 ${className}`}>
       <p className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">{label}</p>

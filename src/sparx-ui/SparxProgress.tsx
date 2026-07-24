@@ -1,21 +1,21 @@
-export type SignalProgressTone = "signal" | "success" | "warning" | "quiet";
+export type SparxProgressTone = "signal" | "success" | "warning" | "quiet";
 
-interface SignalProgressProps {
+interface SparxProgressProps {
   label: string;
   value: string;
   percent: number;
-  tone?: SignalProgressTone;
+  tone?: SparxProgressTone;
   className?: string;
 }
 
-const barTone: Record<SignalProgressTone, string> = {
+const barTone: Record<SparxProgressTone, string> = {
   signal: "bg-red-400 shadow-[0_0_14px_rgba(248,113,113,0.45)]",
   success: "bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.35)]",
   warning: "bg-amber-300 shadow-[0_0_14px_rgba(252,211,77,0.35)]",
   quiet: "bg-neutral-500",
 };
 
-export function SignalProgress({ label, value, percent, tone = "signal", className = "" }: SignalProgressProps) {
+export function SparxProgress({ label, value, percent, tone = "signal", className = "" }: SparxProgressProps) {
   const safePercent = Math.min(100, Math.max(0, percent));
 
   return (

@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     lib: {
-      entry: resolve(import.meta.dirname, "src/design-system/index.ts"),
+      entry: resolve(import.meta.dirname, "src/sparx-ui/index.ts"),
       formats: ["es"],
       fileName: "index",
     },

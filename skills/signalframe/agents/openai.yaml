@@ -1,4 +1,0 @@
-interface:
-  display_name: "Signalframe"
-  short_description: "Apply Signalframe to React product interfaces"
-  default_prompt: "Use $signalframe to apply Signalframe to this React interface."

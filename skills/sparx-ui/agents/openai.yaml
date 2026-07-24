@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sparx UI"
+  short_description: "Apply Sparx UI to React product interfaces"
+  default_prompt: "Use $sparx-ui to apply Sparx UI to this React interface."

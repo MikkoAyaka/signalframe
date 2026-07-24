@@ -4,6 +4,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   // GitHub Pages serves project sites below the repository name.
-  base: process.env.GITHUB_ACTIONS ? "/signalframe/" : "/",
+  base: process.env.GITHUB_ACTIONS ? "/sparx-ui/" : "/",
   plugins: [react(), tailwindcss()],
 });

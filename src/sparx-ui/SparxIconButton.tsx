@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 
-interface SignalIconButtonProps {
+interface SparxIconButtonProps {
   children: ReactNode;
   active?: boolean;
   className?: string;
@@ -10,7 +10,7 @@ interface SignalIconButtonProps {
   type?: "button" | "submit" | "reset";
 }
 
-export function SignalIconButton({ children, active = false, className = "", type = "button", ...props }: SignalIconButtonProps) {
+export function SparxIconButton({ children, active = false, className = "", type = "button", ...props }: SparxIconButtonProps) {
   return (
     <button
       disabled={props.disabled}
