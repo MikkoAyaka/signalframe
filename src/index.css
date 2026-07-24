@@ -39,6 +39,13 @@ body {
     var(--sparx-canvas);
 }
 
+.sparx-experience-canvas {
+  background:
+    radial-gradient(circle at 82% -12%, rgba(239, 68, 68, 0.16), transparent 34rem),
+    radial-gradient(circle at 8% 88%, rgba(127, 29, 29, 0.13), transparent 30rem),
+    var(--sparx-canvas);
+}
+
 .sparx-docs-link {
   color: #a3a3a3;
   transition: color 180ms ease;
