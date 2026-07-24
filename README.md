@@ -9,7 +9,7 @@
 
 Signalframe is MikkoAyaka's portable dark interface system for high-signal products.
 
-The directory is a self-contained Vite + React project. Its source-owned primitives live at `src/design-system/`; it can be moved into a separate repository and deployed without the parent resume project.
+Signalframe is a self-contained Vite + React project. Its source-owned primitives live at `src/design-system/`.
 
 ## Run locally
 
@@ -42,6 +42,6 @@ Pull requests run the same production build without deploying, so broken documen
 1. Copy `src/design-system/` into the target project.
 2. Import `tokens.css` after Tailwind in the target global stylesheet.
 3. Copy only the primitives required by the product: `SignalPanel`, `SignalChip`, `SignalIconButton`, and `SignalSectionHeading`.
-4. Use the composition rules in the documentation site rather than reproducing the resume page structure.
+4. Use the composition rules in the documentation site rather than copying a finished screen wholesale.
 
 The primitives intentionally depend only on React and Tailwind utility classes. They do not require a runtime design-system provider or an external component library.

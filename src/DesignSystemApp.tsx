@@ -47,7 +47,7 @@ const localeCopy = {
     mobileLabel: "Interface system",
     eyebrow: "Design and component specification",
     hero: "A calm frame for high-signal work.",
-    intro: "Signalframe is MikkoAyaka's dark interface system for data-rich products, personal workspaces, and command surfaces. It extracts the shared design language of Resume Portfolio and SparX AoE4 GameBox.",
+    intro: "Signalframe is MikkoAyaka's dark interface system for data-rich products, personal workspaces, and command surfaces.",
     read: "Read the system",
     inspect: "Inspect components",
     footer: "Source-based design documentation",
@@ -154,7 +154,7 @@ import { signalMotion } from "@/design-system";
     layout="position"
     {...signalMotion.spatial}
   >
-    <ResumeCard item={activeItem} />
+    <WorkspaceCard item={activeItem} />
   </motion.article>
 </AnimatePresence>`,
   gesture: `const dragTransition = {
@@ -270,7 +270,7 @@ export function DesignSystemApp() {
             </section>
 
             <DocSection id="principles">
-              <SignalSectionHeading eyebrow="Foundations / 01" title="Principles" description="The rules that make the system recognizable across a portfolio and a competitive game dashboard." />
+              <SignalSectionHeading eyebrow="Foundations / 01" title="Principles" description="The rules that make the system recognizable across focused workspaces and data-rich interfaces." />
               <div className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-2">
                 {principles.map(([title, description], index) => (
                   <div key={title} className="bg-neutral-950/75 p-6 transition-colors hover:bg-neutral-900/65">
@@ -540,14 +540,15 @@ function FontSpec({ item }: { item: readonly [string, string, string] }) {
 }
 
 function MotionLab({ copy }: { copy: { eyebrow: string; title: string; description: string; trigger: string; rest: string; intent: string; settle: string } }) {
-  const [active, setActive] = useState(false);
+  const [run, setRun] = useState(0);
+  const [settled, setSettled] = useState(false);
 
   const replay = () => {
-    setActive(false);
-    requestAnimationFrame(() => requestAnimationFrame(() => setActive(true)));
+    setSettled(false);
+    setRun((current) => current + 1);
   };
 
-  return <SignalPanel interactive={false} tone="command" className="overflow-hidden p-6"><div className="grid gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-red-400">{copy.eyebrow}</p><h3 className="mt-3 text-lg font-medium text-white">{copy.title}</h3><p className="mt-3 text-sm leading-6 text-neutral-400">{copy.description}</p><button type="button" onClick={replay} className="mt-5 inline-flex items-center gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 text-xs text-red-100 transition-colors hover:bg-red-500/20"><Sparkles className="h-3.5 w-3.5" /> {copy.trigger}</button></div><div className="relative min-h-44 overflow-hidden rounded-xl border border-white/[0.08] bg-black/20"><div className={`absolute left-[12%] top-7 grid h-24 w-44 place-items-center rounded-xl border border-white/[0.08] bg-neutral-900/80 text-sm text-neutral-400 transition-all duration-300 ${active ? "translate-x-[72%] -translate-y-1 scale-[0.96] opacity-60" : ""}`}>{copy.rest}</div><div className={`absolute left-[22%] top-12 grid h-24 w-44 place-items-center rounded-xl border border-red-500/35 bg-red-500/10 text-sm text-red-100 shadow-[0_18px_45px_-24px_rgba(248,113,113,0.9)] transition-all duration-[420ms] ease-out ${active ? "translate-x-[72%] -translate-y-5" : ""}`}>{active ? copy.settle : copy.intent}</div><div className="absolute bottom-4 left-5 right-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-600"><span>{copy.intent}</span><span className="h-px flex-1 bg-red-500/30" /><span>{copy.settle}</span></div></div></div></SignalPanel>;
+  return <SignalPanel interactive={false} tone="command" className="overflow-hidden p-6"><div className="grid gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-red-400">{copy.eyebrow}</p><h3 className="mt-3 text-lg font-medium text-white">{copy.title}</h3><p className="mt-3 text-sm leading-6 text-neutral-400">{copy.description}</p><button type="button" onClick={replay} className="mt-5 inline-flex items-center gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 text-xs text-red-100 transition-colors hover:bg-red-500/20"><Sparkles className="h-3.5 w-3.5" /> {copy.trigger}</button></div><div className="relative min-h-48 overflow-hidden rounded-xl border border-white/[0.08] bg-black/20"><div className="absolute left-6 right-6 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-white/[0.06] via-red-500/45 to-white/[0.06]" /><div className="absolute left-6 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-neutral-500" /><div className="absolute right-6 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-red-300 shadow-[0_0_16px_rgba(248,113,113,0.7)]" /><div key={run} data-motion-card onAnimationEnd={() => setSettled(true)} className={`sf-motion-card ${run > 0 ? "sf-motion-card--moving" : ""}`}>{settled ? copy.settle : copy.intent}</div><div className="absolute bottom-4 left-6 right-6 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-600"><span>{copy.rest}</span><span>{copy.settle}</span></div></div></div></SignalPanel>;
 }
 
 function HierarchyRow({ level, style, use }: { level: string; style: string; use: string }) {
