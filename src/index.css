@@ -149,11 +149,6 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sf-motion-card--moving {
-    animation-duration: 1ms;
-  }
-}
 
 .sf-lang-toggle:focus-visible,
 .sf-docs-link:focus-visible {
