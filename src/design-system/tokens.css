@@ -1,0 +1,33 @@
+:root {
+  --sf-canvas: #09090b;
+  --sf-surface: rgba(23, 23, 23, 0.58);
+  --sf-surface-strong: rgba(23, 23, 23, 0.82);
+  --sf-line: rgba(255, 255, 255, 0.08);
+  --sf-line-signal: rgba(239, 68, 68, 0.3);
+  --sf-text: #fafafa;
+  --sf-text-muted: #a3a3a3;
+  --sf-text-quiet: #525252;
+  --sf-signal: #ef4444;
+  --sf-signal-soft: rgba(239, 68, 68, 0.16);
+  --sf-radius-panel: 1rem;
+  --sf-radius-control: 0.75rem;
+  --sf-shadow-panel: 0 22px 64px -24px rgba(0, 0, 0, 0.9);
+  --sf-shadow-signal: 0 0 36px -12px rgba(239, 68, 68, 0.32);
+}
+
+@layer utilities {
+  .sf-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .sf-scene {
+    perspective: 1800px;
+  }
+
+  .sf-elevated {
+    box-shadow: var(--sf-shadow-panel), var(--sf-shadow-signal);
+  }
+}

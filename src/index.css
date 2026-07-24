@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@source "./design-system";
+@source "./";
+@import "./design-system/tokens.css";
+
+:root {
+  color: var(--sf-text);
+  background: var(--sf-canvas);
+  font-family: Inter, "Microsoft YaHei UI", "PingFang SC", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--sf-canvas);
+}
+
+::selection {
+  background: rgba(239, 68, 68, 0.28);
+  color: #fee2e2;
+}
+
+.sf-docs-canvas {
+  background:
+    radial-gradient(circle at 78% -8%, rgba(239, 68, 68, 0.12), transparent 28rem),
+    radial-gradient(circle at 6% 65%, rgba(127, 29, 29, 0.14), transparent 26rem),
+    var(--sf-canvas);
+}
+
+.sf-docs-link {
+  color: #a3a3a3;
+  transition: color 180ms ease;
+}
+
+.sf-docs-link:hover {
+  color: #ffffff;
+}
+
+.sf-docs-nav-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sf-docs-nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sf-docs-nav-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.sf-docs-nav-scroll {
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  scrollbar-width: thin;
+}
+
+.sf-code-block {
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.sf-shiki {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.sf-shiki pre {
+  margin: 0;
+  min-width: max-content;
+  padding: 1rem 1.25rem;
+  background: transparent !important;
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+}
+
+.sf-shiki code {
+  counter-reset: line;
+}
+
+.sf-shiki .line {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.sf-lang-toggle:focus-visible,
+.sf-docs-link:focus-visible {
+  outline: 2px solid rgba(248, 113, 113, 0.8);
+  outline-offset: 3px;
+}
