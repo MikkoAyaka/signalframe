@@ -23,7 +23,7 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { Suspense, createContext, lazy, useContext, useEffect, useState, type ReactNode } from "react";
 import {
   SparxChip,
   SparxDataRow,
@@ -37,11 +37,15 @@ import {
 } from "./sparx-ui";
 import { CodeBlock } from "./CodeBlock";
 
+const HeroLandingExample = lazy(() => import("./examples/HeroLandingExample").then((module) => ({ default: module.HeroLandingExample })));
+const ImmersiveConsoleExample = lazy(() => import("./examples/ImmersiveConsoleExample").then((module) => ({ default: module.ImmersiveConsoleExample })));
+const ToolboxMenuExample = lazy(() => import("./examples/ToolboxMenuExample").then((module) => ({ default: module.ToolboxMenuExample })));
+
 type Locale = "en" | "zh";
 
 const localeCopy = {
   en: {
-    nav: [["Foundations", [["Principles", "principles"], ["Color and depth", "foundations"], ["Typography", "typography"], ["Motion", "motion"], ["Product design", "product-design"], ["Accessibility", "accessibility"]]], ["Components", [["Core primitives", "components"], ["Data and states", "data-components"]]], ["Patterns", [["Command header", "patterns"], ["Data canvas", "patterns"], ["Inspector rail", "patterns"]]], ["Guidance", [["Content hierarchy", "guidance"], ["Do and avoid", "guidance"], ["Adoption", "guidance"]]]],
+    nav: [["Foundations", [["Principles", "principles"], ["Color and depth", "foundations"], ["Typography", "typography"], ["Motion", "motion"], ["Product design", "product-design"], ["Accessibility", "accessibility"]]], ["Components", [["Core primitives", "components"], ["Data and states", "data-components"]]], ["Patterns", [["Command header", "patterns"], ["Data canvas", "patterns"], ["Inspector rail", "patterns"]]], ["Examples", [["Landing page", "examples"], ["Immersive console", "examples"], ["Toolbox menu", "examples"]]], ["Guidance", [["Content hierarchy", "guidance"], ["Do and avoid", "guidance"], ["Adoption", "guidance"]]]],
     language: "Chinese", switchLanguage: "Switch language to",
     languageShort: "ZH",
     mobileLabel: "Interface system",
@@ -82,7 +86,7 @@ const localeCopy = {
     },
   },
   zh: {
-    nav: [["\u57FA\u7840", [["\u8BBE\u8BA1\u539F\u5219", "principles"], ["\u8272\u5F69\u4E0E\u5C42\u6B21", "foundations"], ["\u5B57\u4F53\u6392\u5370", "typography"], ["\u52A8\u6548", "motion"], ["\u4EA7\u54C1\u8BBE\u8BA1", "product-design"], ["\u65E0\u969C\u788D", "accessibility"]]], ["\u7EC4\u4EF6", [["\u57FA\u7840\u539F\u8BED", "components"], ["\u6570\u636E\u4E0E\u72B6\u6001", "data-components"]]], ["\u6A21\u5F0F", [["\u547D\u4EE4\u5934\u90E8", "patterns"], ["\u6570\u636E\u753B\u5E03", "patterns"], ["\u68C0\u67E5\u5668\u680F", "patterns"]]], ["\u6307\u5357", [["\u4FE1\u606F\u5C42\u7EA7", "guidance"], ["\u63A8\u8350\u4E0E\u907F\u514D", "guidance"], ["\u63A5\u5165\u65B9\u5F0F", "guidance"]]]],
+    nav: [["\u57FA\u7840", [["\u8BBE\u8BA1\u539F\u5219", "principles"], ["\u8272\u5F69\u4E0E\u5C42\u6B21", "foundations"], ["\u5B57\u4F53\u6392\u5370", "typography"], ["\u52A8\u6548", "motion"], ["\u4EA7\u54C1\u8BBE\u8BA1", "product-design"], ["\u65E0\u969C\u788D", "accessibility"]]], ["\u7EC4\u4EF6", [["\u57FA\u7840\u539F\u8BED", "components"], ["\u6570\u636E\u4E0E\u72B6\u6001", "data-components"]]], ["\u6A21\u5F0F", [["\u547D\u4EE4\u5934\u90E8", "patterns"], ["\u6570\u636E\u753B\u5E03", "patterns"], ["\u68C0\u67E5\u5668\u680F", "patterns"]]], ["\u793A\u4F8B", [["\u843D\u5730\u9875", "examples"], ["\u6C89\u6D78\u5F0F\u63A7\u5236\u53F0", "examples"], ["\u5DE5\u5177\u7BB1\u83DC\u5355", "examples"]]], ["\u6307\u5357", [["\u4FE1\u606F\u5C42\u7EA7", "guidance"], ["\u63A8\u8350\u4E0E\u907F\u514D", "guidance"], ["\u63A5\u5165\u65B9\u5F0F", "guidance"]]]],
     language: "English", switchLanguage: "切换语言至", languageShort: "EN", mobileLabel: "\u754C\u9762\u7CFB\u7EDF", eyebrow: "\u8BBE\u8BA1\u4E0E\u7EC4\u4EF6\u89C4\u8303", hero: "\u4E3A\u9AD8\u4EF7\u503C\u4FE1\u606F\u7559\u51FA\u5B89\u9759\u7684\u6846\u67B6\u3002", intro: "Sparx UI \u662F\u4E00\u5957\u9762\u5411\u9AD8\u4FE1\u53F7\u4EA7\u54C1\u7684\u6DF1\u8272\u8BBE\u8BA1\u7CFB\u7EDF\u3002", read: "\u9605\u8BFB\u4F53\u7CFB", inspect: "\u67E5\u770B\u7EC4\u4EF6", footer: "\u57FA\u4E8E\u6E90\u4EE3\u7801\u7684\u8BBE\u8BA1\u6587\u6863",
     typography: {
       eyebrow: "\u57FA\u7840 / 03", title: "\u5B57\u4F53\u662F\u754C\u9762\u8282\u594F\u7684\u5E95\u5C42\u7CFB\u7EDF\u3002", description: "\u7528\u4EBA\u6587\u65E0\u884C\u7EBF\u4F53\u9605\u8BFB\u4E0E\u51B3\u7B56\uFF0C\u7528\u7D27\u51D1\u7B49\u5BBD\u5B57\u4F53\u5448\u73B0\u6765\u6E90\u4E0E\u72B6\u6001\u3002",
@@ -101,7 +105,7 @@ const localeCopy = {
 
 const adoptionCopy = {
   en: {
-    eyebrow: "Guidance / 06",
+    eyebrow: "Guidance / 07",
     title: "Two ways to bring the system into a product.",
     description: "Install the React component package when the product needs rendered primitives, or use the agent skill when an agent needs the system's design decisions while implementing an interface.",
     componentLabel: "Component library",
@@ -114,7 +118,7 @@ const adoptionCopy = {
     skillSteps: ["Copy skills/sparx-ui to your agent's skill directory.", "Start a new agent session so it discovers the skill.", "Invoke $sparx-ui with a concrete interface objective and constraints.", "Let the agent inspect the existing product first; it should preserve identity unless you ask for a full restyle."],
   },
   zh: {
-    eyebrow: "\u6307\u5357 / 06",
+    eyebrow: "\u6307\u5357 / 07",
     title: "\u4e24\u79cd\u65b9\u5f0f\uff0c\u8ba9\u8fd9\u5957\u7cfb\u7edf\u8fdb\u5165\u4f60\u7684\u4ea7\u54c1\u3002",
     description: "\u4ea7\u54c1\u9700\u8981\u771f\u5b9e\u6e32\u67d3\u7684\u539f\u8bed\u65f6\u5b89\u88c5 React \u7ec4\u4ef6\u5305\uff1b\u9700\u8981 Agent \u5728\u5b9e\u73b0\u754c\u9762\u65f6\u9075\u5faa\u8fd9\u5957\u7cfb\u7edf\u7684\u8bbe\u8ba1\u51b3\u7b56\u65f6\uff0c\u4f7f\u7528 Agent Skill\u3002",
     componentLabel: "\u7ec4\u4ef6\u5e93",
@@ -125,6 +129,29 @@ const adoptionCopy = {
     skillTitle: "\u5728\u5b9e\u73b0\u4e4b\u524d\uff0c\u5148\u5c06\u8fd9\u5957\u7cfb\u7edf\u7684\u51b3\u7b56\u4ea4\u7ed9 Agent\u3002",
     skillDescription: "\u968f\u4ed3\u5e93\u63d0\u4f9b\u7684 Skill \u4f1a\u5c06\u5e03\u5c40\u3001\u5b57\u4f53\u3001\u8868\u9762\u3001\u7ec4\u4ef6\u548c\u52a8\u6548\u89c4\u5219\u5e26\u5165 Agent \u7684\u5de5\u4f5c\u4e0a\u4e0b\u6587\u3002\u5b83\u4e0d\u4f9d\u8d56\u8fd0\u884c\u65f6\uff0c\u4e5f\u4e0d\u662f\u7ec4\u4ef6\u5305\u3002",
     skillSteps: ["\u5c06 skills/sparx-ui \u590d\u5236\u5230\u4f60\u7684 Agent Skill \u76ee\u5f55\u3002", "\u542f\u52a8\u4e00\u4e2a\u65b0\u7684 Agent \u4f1a\u8bdd\uff0c\u8ba9\u5b83\u53d1\u73b0\u8be5 Skill\u3002", "\u7528\u660e\u786e\u7684\u754c\u9762\u76ee\u6807\u4e0e\u7ea6\u675f\u6761\u4ef6\u8c03\u7528 $sparx-ui\u3002", "\u8ba9 Agent \u5148\u68c0\u67e5\u65e2\u6709\u4ea7\u54c1\uff1b\u9664\u975e\u4f60\u660e\u786e\u8981\u6c42\u5168\u9762\u91cd\u5851\uff0c\u5b83\u5e94\u4fdd\u7559\u4ea7\u54c1\u672c\u8eab\u7684\u8bc6\u522b\u3002"],
+  },
+} as const;
+
+const exampleCopy = {
+  en: {
+    eyebrow: "Examples / 05",
+    title: "One system, three product postures.",
+    description: "The same primitives can support a persuasive first impression, a focused command surface, or an action-dense utility menu. These live examples keep the frame quiet while changing the product's job.",
+    selectLabel: "Choose an example page",
+    loading: "Loading live example...",
+    landing: ["Landing page", "A cinematic first impression with a clear next step."],
+    console: ["Immersive console", "A focused command surface for live system work."],
+    toolbox: ["Toolbox menu", "A fast, game-adjacent launcher for specialist tools."],
+  },
+  zh: {
+    eyebrow: "\u793A\u4F8B / 05",
+    title: "\u540C\u4E00\u5957\u7CFB\u7EDF\uFF0C\u4E09\u79CD\u4EA7\u54C1\u59FF\u6001\u3002",
+    description: "\u540C\u4E00\u7EC4\u539F\u8BED\u53EF\u4EE5\u627F\u8F7D\u6709\u8BF4\u670D\u529B\u7684\u9996\u6B21\u5370\u8C61\u3001\u4E13\u6CE8\u7684\u547D\u4EE4\u8868\u9762\uFF0C\u6216\u9AD8\u6548\u7684\u4E13\u4E1A\u5DE5\u5177\u83DC\u5355\u3002\u8FD9\u4E9B\u5B9E\u65F6\u793A\u4F8B\u8BA9\u6846\u67B6\u4FDD\u6301\u5B89\u9759\uFF0C\u540C\u65F6\u6539\u53D8\u4EA7\u54C1\u7684\u89D2\u8272\u3002",
+    selectLabel: "\u9009\u62E9\u793A\u4F8B\u9875\u9762",
+    loading: "\u6B63\u5728\u52A0\u8F7D\u5B9E\u65F6\u793A\u4F8B...",
+    landing: ["\u843D\u5730\u9875", "\u4EE5\u6E05\u6670\u7684\u4E0B\u4E00\u6B65\u8D62\u5F97\u7B2C\u4E00\u5370\u8C61\u3002"],
+    console: ["\u6C89\u6D78\u5F0F\u63A7\u5236\u53F0", "\u7528\u4E8E\u5B9E\u65F6\u7CFB\u7EDF\u5DE5\u4F5C\u7684\u4E13\u6CE8\u547D\u4EE4\u8868\u9762\u3002"],
+    toolbox: ["\u5DE5\u5177\u7BB1\u83DC\u5355", "\u9762\u5411\u4E13\u4E1A\u5DE5\u5177\u7684\u5FEB\u901F\u6E38\u620F\u5316\u542F\u52A8\u5668\u3002"],
   },
 } as const;
 
@@ -163,7 +190,7 @@ const zhText: Record<string, string> = {
   "Spatial handoff": "空间交接", "Direct manipulation": "直接操控", "Interruption policy": "中断策略", "Use motion when": "适合使用动效", "Do not animate": "不应使用动效",
   "Foundations / 04": "基础 / 04", "Accessible by default": "默认无障碍", "A dark system gains quality from clarity, not from low contrast. Every signal needs a non-color equivalent.": "深色系统的品质来自清晰，而不是低对比度；每个信号都需要非色彩的等价表达。", "Required behavior": "必要行为", "Responsive baseline": "响应式基线",
   "Components / 03": "组件 / 03", "Portable primitives": "可移植原语", "All components are source-owned under src/sparx-ui and rendered by this documentation site directly.": "所有组件均由 src/sparx-ui 源码维护，并由本站直接渲染。", "Component": "组件",
-  "Components / 04": "组件 / 04", "Data and operational states": "数据与运行状态", "Patterns / 04": "模式 / 04", "Composition rules": "组合规则", "Guidance / 05": "指南 / 05", "Write and compose with intent": "以明确意图编写与组合", "Content hierarchy": "内容层级", "State and feedback": "状态与反馈", "Do": "推荐", "Avoid": "避免", "Adoption checklist": "接入检查清单",
+  "Components / 04": "组件 / 04", "Data and operational states": "数据与运行状态", "Patterns / 04": "模式 / 04", "Composition rules": "组合规则", "Guidance / 06": "指南 / 06", "Write and compose with intent": "以明确意图编写与组合", "Content hierarchy": "内容层级", "State and feedback": "状态与反馈", "Do": "推荐", "Avoid": "避免", "Adoption checklist": "接入检查清单",
   "Operational clarity": "可判断的清晰度", "The default state must be complete and useful. Hover and focus may add a 180-300ms emphasis layer, not move core content.": "默认状态必须完整且有用。悬浮和聚焦可以增加 180-300ms 的强调层，但不应移动核心内容。",
   "A page can use a quiet canvas, one raised surface plane, and content lifted inside it. Do not stack multiple blur cards to fake hierarchy.": "页面可以使用安静的画布、一个抬升的表面层，以及其中被轻微托起的内容。不要用多层模糊卡片伪造层级。",
   "Color, border, icon feedback": "色彩、边框与图标反馈", "Surface emphasis, toolbar state, disclosure": "表面强调、工具栏状态与内容展开", "Route, card stack, or large layout transition": "路由、卡片栈或大型布局过渡",
@@ -578,8 +605,13 @@ export function SparxUiApp() {
               </SparxPanel>
             </DocSection>
 
+            <DocSection id="examples">
+              <SparxSectionHeading eyebrow={exampleCopy[locale].eyebrow} title={exampleCopy[locale].title} description={exampleCopy[locale].description} />
+              <ExamplePages locale={locale} />
+            </DocSection>
+
             <DocSection id="guidance">
-              <SparxSectionHeading eyebrow={t("Guidance / 05")} title={t("Write and compose with intent")} description={t("The system is portable because it defines decisions, not because every screen looks the same. Use these rules before introducing a new primitive.")} />
+              <SparxSectionHeading eyebrow={t("Guidance / 06")} title={t("Write and compose with intent")} description={t("The system is portable because it defines decisions, not because every screen looks the same. Use these rules before introducing a new primitive.")} />
               <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
                 <SparxPanel interactive={false} tone="quiet" className="p-6">
                   <p className="font-mono text-xs uppercase tracking-[0.18em] text-red-400">{t("Content hierarchy")}</p>
@@ -635,6 +667,46 @@ function Navigation({ locale, className = "" }: { locale: Locale; className?: st
         </div>
       ))}
     </nav>
+  );
+}
+
+type ExamplePageId = "landing" | "console" | "toolbox";
+
+function ExamplePages({ locale }: { locale: Locale }) {
+  const [active, setActive] = useState<ExamplePageId>("landing");
+  const copy = exampleCopy[locale];
+  const examples = [
+    { id: "landing" as const, label: copy.landing[0], description: copy.landing[1], icon: Sparkles, content: <HeroLandingExample locale={locale} /> },
+    { id: "console" as const, label: copy.console[0], description: copy.console[1], icon: Command, content: <ImmersiveConsoleExample locale={locale} /> },
+    { id: "toolbox" as const, label: copy.toolbox[0], description: copy.toolbox[1], icon: Layers3, content: <ToolboxMenuExample locale={locale} /> },
+  ];
+  const selected = examples.find((example) => example.id === active) ?? examples[0];
+
+  return (
+    <div>
+      <div role="tablist" aria-label={copy.selectLabel} className="grid gap-2 border-y border-white/[0.08] py-3 md:grid-cols-3">
+        {examples.map((example, index) => {
+          const Icon = example.icon;
+          const isSelected = active === example.id;
+          return (
+            <button
+              key={example.id}
+              id={`example-tab-${example.id}`}
+              type="button"
+              role="tab"
+              aria-controls={`example-page-${example.id}`}
+              aria-selected={isSelected}
+              onClick={() => setActive(example.id)}
+              className={`group flex min-w-0 items-start gap-3 rounded-xl border px-3.5 py-3.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300/80 ${isSelected ? "border-red-500/30 bg-red-500/[0.09]" : "border-transparent text-neutral-400 hover:border-white/[0.08] hover:bg-white/[0.025] hover:text-neutral-200"}`}
+            >
+              <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg border transition-colors ${isSelected ? "border-red-400/30 bg-red-500/10 text-red-200" : "border-white/[0.08] bg-white/[0.03] text-neutral-500 group-hover:text-neutral-300"}`}><Icon className="h-3.5 w-3.5" /></span>
+              <span className="min-w-0"><span className={`font-mono text-xs tracking-[0.16em] ${isSelected ? "text-red-300" : "text-neutral-600"}`}>0{index + 1}</span><span className="mt-1 block text-sm font-medium text-white">{example.label}</span><span className="mt-1 block text-xs leading-5 text-neutral-500">{example.description}</span></span>
+            </button>
+          );
+        })}
+      </div>
+      <div id={`example-page-${selected.id}`} role="tabpanel" aria-labelledby={`example-tab-${selected.id}`} className="mt-6"><Suspense fallback={<div className="grid min-h-72 place-items-center rounded-2xl border border-white/[0.08] bg-white/[0.02] font-mono text-xs uppercase tracking-[0.16em] text-neutral-500" aria-live="polite">{copy.loading}</div>}>{selected.content}</Suspense></div>
+    </div>
   );
 }
 
