@@ -1,12 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @source "./design-system";
 @source "./";
 @import "./design-system/tokens.css";
 
 :root {
+  --sf-font-sans: "Manrope", "Noto Sans SC", "Microsoft YaHei UI", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  --sf-font-mono: "JetBrains Mono", "Noto Sans SC", "Microsoft YaHei UI", "PingFang SC", ui-monospace, monospace;
   color: var(--sf-text);
   background: var(--sf-canvas);
-  font-family: Inter, "Microsoft YaHei UI", "PingFang SC", system-ui, sans-serif;
+  font-family: var(--sf-font-sans);
 }
 
 html {
@@ -17,6 +20,11 @@ body {
   min-width: 320px;
   margin: 0;
   background: var(--sf-canvas);
+}
+
+/* Keep CJK metadata in the system's sans family when the mono face has no glyph. */
+.font-mono {
+  font-family: var(--sf-font-mono) !important;
 }
 
 ::selection {
@@ -66,6 +74,30 @@ body {
 .sf-shiki {
   max-width: 100%;
   overflow-x: auto;
+  scrollbar-color: rgba(248, 113, 113, 0.52) rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+}
+
+.sf-shiki::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sf-shiki::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sf-shiki::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(248, 113, 113, 0.52);
+  background-clip: padding-box;
+}
+
+.sf-shiki::-webkit-scrollbar-thumb:hover {
+  background: rgba(252, 165, 165, 0.78);
+  background-clip: padding-box;
 }
 
 .sf-shiki pre {
@@ -73,7 +105,7 @@ body {
   min-width: max-content;
   padding: 1rem 1.25rem;
   background: transparent !important;
-  font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  font-family: var(--sf-font-mono);
   font-size: 0.75rem;
   line-height: 1.5rem;
 }

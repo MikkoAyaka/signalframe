@@ -56,7 +56,7 @@ const localeCopy = {
       title: "Typography is the interface's pacing system.",
       description: "Signalframe uses a humanist sans for decisions and a compact mono face for provenance, state, and measurement.",
       ui: ["Interface text", "Manrope", "Use for headings, controls, and explanatory prose. Its open counters keep dense dark interfaces calm."],
-      cjk: ["Chinese text", "Noto Sans SC", "Use for Simplified Chinese. It keeps stroke weight stable beside Manrope and avoids a mismatched system fallback."],
+      cjk: ["Chinese text", "Noto Sans SC", "Use for Simplified Chinese across both prose and metadata. It keeps stroke weight stable beside Manrope and replaces an unreliable browser serif fallback when mono labels contain CJK glyphs."],
       mono: ["System text", "JetBrains Mono", "Use for labels, timestamps, shortcuts, code, and raw values. Do not use it for paragraph reading."],
       ruleTitle: "Pair roles, not fonts.",
       rule: "One display/sans family plus one mono family is sufficient. Set line length, leading, contrast, and hierarchy before adding another typeface.",
@@ -86,7 +86,7 @@ const localeCopy = {
     language: "English", switchLanguage: "切换语言至", languageShort: "EN", mobileLabel: "\u754C\u9762\u7CFB\u7EDF", eyebrow: "\u8BBE\u8BA1\u4E0E\u7EC4\u4EF6\u89C4\u8303", hero: "\u4E3A\u9AD8\u4EF7\u503C\u4FE1\u606F\u7559\u51FA\u5B89\u9759\u7684\u6846\u67B6\u3002", intro: "Signalframe \u662F\u4E00\u5957\u9762\u5411\u9AD8\u4FE1\u53F7\u4EA7\u54C1\u7684\u6DF1\u8272\u8BBE\u8BA1\u7CFB\u7EDF\u3002", read: "\u9605\u8BFB\u4F53\u7CFB", inspect: "\u67E5\u770B\u7EC4\u4EF6", footer: "\u57FA\u4E8E\u6E90\u4EE3\u7801\u7684\u8BBE\u8BA1\u6587\u6863",
     typography: {
       eyebrow: "\u57FA\u7840 / 03", title: "\u5B57\u4F53\u662F\u754C\u9762\u8282\u594F\u7684\u5E95\u5C42\u7CFB\u7EDF\u3002", description: "\u7528\u4EBA\u6587\u65E0\u884C\u7EBF\u4F53\u9605\u8BFB\u4E0E\u51B3\u7B56\uFF0C\u7528\u7D27\u51D1\u7B49\u5BBD\u5B57\u4F53\u5448\u73B0\u6765\u6E90\u4E0E\u72B6\u6001\u3002",
-      ui: ["\u754C\u9762\u6B63\u6587", "Manrope", "\u7528\u4E8E\u6807\u9898\u3001\u63A7\u4EF6\u548C\u8BF4\u660E\u6027\u6587\u5B57\u3002"], cjk: ["\u4E2D\u6587\u6B63\u6587", "Noto Sans SC", "\u7528\u4E8E\u7B80\u4F53\u4E2D\u6587\uFF0C\u4E0E Manrope \u7A33\u5B9A\u914D\u5BF9\u3002"], mono: ["\u7CFB\u7EDF\u6587\u5B57", "JetBrains Mono", "\u7528\u4E8E\u6807\u7B7E\u3001\u65F6\u95F4\u3001\u4EE3\u7801\u548C\u539F\u59CB\u503C\u3002"],
+      ui: ["\u754C\u9762\u6B63\u6587", "Manrope", "\u7528\u4E8E\u6807\u9898\u3001\u63A7\u4EF6\u548C\u8BF4\u660E\u6027\u6587\u5B57\u3002"], cjk: ["\u4E2D\u6587\u6B63\u6587", "Noto Sans SC", "\u7528\u4E8E\u7B80\u4F53\u4E2D\u6587\u7684\u6B63\u6587\u4E0E\u5143\u6570\u636E\u3002\u5B83\u4E0E Manrope \u7A33\u5B9A\u914D\u5BF9\uFF0C\u5E76\u5728\u7B49\u5BBD\u6807\u7B7E\u5305\u542B\u4E2D\u6587\u65F6\u53D6\u4EE3\u4E0D\u53EF\u9760\u7684\u6D4F\u89C8\u5668\u884C\u4E66\u4F53\u56DE\u9000\u3002"], mono: ["\u7CFB\u7EDF\u6587\u5B57", "JetBrains Mono", "\u7528\u4E8E\u6807\u7B7E\u3001\u65F6\u95F4\u3001\u4EE3\u7801\u548C\u539F\u59CB\u503C\u3002"],
       ruleTitle: "\u6309\u89D2\u8272\u914D\u5BF9\uFF0C\u800C\u4E0D\u662F\u5806\u53E0\u5B57\u4F53\u3002", rule: "\u4E00\u7EC4\u65E0\u884C\u7EBF\u5B57\u4F53\u52A0\u4E00\u7EC4\u7B49\u5BBD\u5B57\u4F53\u5DF2\u8DB3\u591F\u3002\u5148\u5904\u7406\u884C\u957F\u3001\u884C\u9AD8\u3001\u5BF9\u6BD4\u5EA6\u548C\u5C42\u7EA7\u3002",
     },
     product: {
@@ -367,7 +367,7 @@ export function DesignSystemApp() {
                 </SignalPanel>
                 <SignalPanel interactive={false} tone="quiet" className="overflow-hidden">
                   <div className="p-6"><p className="font-mono text-xs uppercase tracking-[0.18em] text-red-400">{copy.typography.ruleTitle}</p><p className="mt-4 max-w-xl text-sm leading-7 text-neutral-300">{copy.typography.rule}</p><div className="mt-7 border-l border-red-400/60 pl-5"><p className="text-3xl font-semibold tracking-[-0.045em] text-white">{t("Operational clarity")}</p><p className="mt-3 text-base leading-7 text-neutral-400">{"\u5C06\u590D\u6742\u72B6\u6001\u8F6C\u5316\u4E3A\u53EF\u5224\u65AD\u7684\u4FE1\u606F\u3002"}</p><p className="mt-5 font-mono text-xs tracking-[0.14em] text-red-300">SYNC / 09:42 / HEALTHY</p></div></div>
-                  <CodeBlock language="css" label="CSS" code={`@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap");\n\n:root {\n  --sf-font-sans: "Manrope", "Noto Sans SC", sans-serif;\n  --sf-font-mono: "JetBrains Mono", "Cascadia Code", monospace;\n}`} />
+                  <CodeBlock language="css" label="CSS" code={`@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap");\n\n:root {\n  --sf-font-sans: "Manrope", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;\n  --sf-font-mono: "JetBrains Mono", "Noto Sans SC", "Microsoft YaHei UI", monospace;\n}`} />
                 </SignalPanel>
               </div>
               <SignalPanel interactive={false} tone="quiet" className="p-6">
