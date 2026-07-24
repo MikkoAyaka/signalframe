@@ -46,21 +46,21 @@ Signalframe supports two complementary adoption paths. The documentation site ex
 Install the public package in a React + Tailwind project:
 
 ```bash
-npm install @mikkoayaka/signalframe
+npm install @mikkoayaka/sparx-ui
 ```
 
 In a typical `src/index.css`, import Tailwind first, point Tailwind v4 at the distributed component classes, and then load the tokens:
 
 ```css
 @import "tailwindcss";
-@source "../node_modules/@mikkoayaka/signalframe/lib";
-@import "@mikkoayaka/signalframe/tokens.css";
+@source "../node_modules/@mikkoayaka/sparx-ui/lib";
+@import "@mikkoayaka/sparx-ui/tokens.css";
 ```
 
 Import only the primitives a product needs:
 
 ```tsx
-import { SignalPanel, SignalToolbar } from "@mikkoayaka/signalframe";
+import { SignalPanel, SignalToolbar } from "@mikkoayaka/sparx-ui";
 ```
 
 The package exports ESM React primitives, TypeScript declarations, and `tokens.css`. It expects React as a peer dependency. Add `motion/react` only when a product actually renders motion; `signalMotion` remains framework-neutral transition configuration.

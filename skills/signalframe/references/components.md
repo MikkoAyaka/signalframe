@@ -1,6 +1,6 @@
 # Components
 
-Read this reference only when choosing or implementing primitives. Import from `@mikkoayaka/signalframe` and bring only the components the target interface needs.
+Read this reference only when choosing or implementing primitives. Import from `@mikkoayaka/sparx-ui` and bring only the components the target interface needs.
 
 ```tsx
 import {
@@ -14,7 +14,7 @@ import {
   SignalSectionHeading,
   SignalToolbar,
   signalMotion,
-} from "@mikkoayaka/signalframe";
+} from "@mikkoayaka/sparx-ui";
 ```
 
 | Primitive | Use it for | Avoid it when |
