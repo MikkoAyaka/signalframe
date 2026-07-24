@@ -99,6 +99,35 @@ const localeCopy = {
   },
 } as const;
 
+const adoptionCopy = {
+  en: {
+    eyebrow: "Guidance / 06",
+    title: "Two ways to bring the system into a product.",
+    description: "Install the React component package when the product needs rendered primitives, or use the agent skill when an agent needs the system's design decisions while implementing an interface.",
+    componentLabel: "Component library",
+    componentTitle: "Install primitives as an npm package.",
+    componentDescription: "The public React package ships the primitives, type declarations, and design tokens. It expects React and a Tailwind build that scans the package's distributed classes.",
+    componentSteps: ["Install @mikkoayaka/signalframe in the React and Tailwind project.", "Import tokens.css after Tailwind in the global stylesheet.", "Let Tailwind scan the package's lib directory so its utility classes are emitted.", "Import only the primitives needed from @mikkoayaka/signalframe; add motion/react only if a product actually renders motion."],
+    skillLabel: "Agent skill",
+    skillTitle: "Give an agent the system's decisions before implementation.",
+    skillDescription: "The included skill carries the layout, type, surface, component, and motion rules into an agent's working context. It has no runtime dependency and is not a component package.",
+    skillSteps: ["Copy skills/signalframe to your agent's skill directory.", "Start a new agent session so it discovers the skill.", "Invoke $signalframe with a concrete interface objective and constraints.", "Let the agent inspect the existing product first; it should preserve identity unless you ask for a full restyle."],
+  },
+  zh: {
+    eyebrow: "\u6307\u5357 / 06",
+    title: "\u4e24\u79cd\u65b9\u5f0f\uff0c\u8ba9\u8fd9\u5957\u7cfb\u7edf\u8fdb\u5165\u4f60\u7684\u4ea7\u54c1\u3002",
+    description: "\u4ea7\u54c1\u9700\u8981\u771f\u5b9e\u6e32\u67d3\u7684\u539f\u8bed\u65f6\u5b89\u88c5 React \u7ec4\u4ef6\u5305\uff1b\u9700\u8981 Agent \u5728\u5b9e\u73b0\u754c\u9762\u65f6\u9075\u5faa\u8fd9\u5957\u7cfb\u7edf\u7684\u8bbe\u8ba1\u51b3\u7b56\u65f6\uff0c\u4f7f\u7528 Agent Skill\u3002",
+    componentLabel: "\u7ec4\u4ef6\u5e93",
+    componentTitle: "\u4ee5 npm \u5305\u7684\u65b9\u5f0f\u5b89\u88c5\u539f\u8bed\u3002",
+    componentDescription: "\u516c\u5f00\u7684 React \u5305\u5305\u542b\u539f\u8bed\u3001\u7c7b\u578b\u58f0\u660e\u4e0e\u8bbe\u8ba1 Token\u3002\u5b83\u9700\u8981 React \u4ee5\u53ca\u4f1a\u626b\u63cf\u5305\u5185\u6784\u5efa\u7c7b\u540d\u7684 Tailwind \u6784\u5efa\u6d41\u7a0b\u3002",
+    componentSteps: ["\u5728 React \u4e0e Tailwind \u9879\u76ee\u4e2d\u5b89\u88c5 @mikkoayaka/signalframe\u3002", "\u5728\u5168\u5c40\u6837\u5f0f\u4e2d\u5c06 tokens.css \u7f6e\u4e8e Tailwind \u4e4b\u540e\u5bfc\u5165\u3002", "\u8ba9 Tailwind \u626b\u63cf\u8be5\u5305\u7684 lib \u76ee\u5f55\uff0c\u4ee5\u4fbf\u8f93\u51fa\u5b83\u4f7f\u7528\u7684\u5de5\u5177\u7c7b\u3002", "\u4ec5\u4ece @mikkoayaka/signalframe \u5bfc\u5165\u6240\u9700\u539f\u8bed\uff1b\u53ea\u5728\u4ea7\u54c1\u771f\u6b63\u6e32\u67d3\u52a8\u6548\u65f6\u52a0\u5165 motion/react\u3002"],
+    skillLabel: "Agent Skill",
+    skillTitle: "\u5728\u5b9e\u73b0\u4e4b\u524d\uff0c\u5148\u5c06\u8fd9\u5957\u7cfb\u7edf\u7684\u51b3\u7b56\u4ea4\u7ed9 Agent\u3002",
+    skillDescription: "\u968f\u4ed3\u5e93\u63d0\u4f9b\u7684 Skill \u4f1a\u5c06\u5e03\u5c40\u3001\u5b57\u4f53\u3001\u8868\u9762\u3001\u7ec4\u4ef6\u548c\u52a8\u6548\u89c4\u5219\u5e26\u5165 Agent \u7684\u5de5\u4f5c\u4e0a\u4e0b\u6587\u3002\u5b83\u4e0d\u4f9d\u8d56\u8fd0\u884c\u65f6\uff0c\u4e5f\u4e0d\u662f\u7ec4\u4ef6\u5305\u3002",
+    skillSteps: ["\u5c06 skills/signalframe \u590d\u5236\u5230\u4f60\u7684 Agent Skill \u76ee\u5f55\u3002", "\u542f\u52a8\u4e00\u4e2a\u65b0\u7684 Agent \u4f1a\u8bdd\uff0c\u8ba9\u5b83\u53d1\u73b0\u8be5 Skill\u3002", "\u7528\u660e\u786e\u7684\u754c\u9762\u76ee\u6807\u4e0e\u7ea6\u675f\u6761\u4ef6\u8c03\u7528 $signalframe\u3002", "\u8ba9 Agent \u5148\u68c0\u67e5\u65e2\u6709\u4ea7\u54c1\uff1b\u9664\u975e\u4f60\u660e\u786e\u8981\u6c42\u5168\u9762\u91cd\u5851\uff0c\u5b83\u5e94\u4fdd\u7559\u4ea7\u54c1\u672c\u8eab\u7684\u8bc6\u522b\u3002"],
+  },
+} as const;
+
 const principles = [
   ["Signal before spectacle", "Use color, glow, and motion to reveal state or action. Decoration never competes with data."],
   ["Depth without weight", "Layer translucency, borders, and soft shadows into one surface. Avoid cards inside cards unless hierarchy changes."],
@@ -262,6 +291,7 @@ export function DesignSystemApp() {
     return storedLocale === "zh" || (!storedLocale && navigator.language.toLowerCase().startsWith("zh")) ? "zh" : "en";
   });
   const copy = localeCopy[locale];
+  const adoption = adoptionCopy[locale];
   const t = (value: string) => locale === "zh" ? zhText[value] ?? value : value;
 
   useEffect(() => {
@@ -564,9 +594,24 @@ export function DesignSystemApp() {
                 <SignalPanel interactive={false} tone="quiet" className="p-6"><p className="font-mono text-xs uppercase tracking-[0.18em] text-emerald-300">{t("Do")}</p><ul className="mt-5 space-y-3 text-sm leading-6 text-neutral-300"><li>{t("Give the page one obvious data or identity anchor.")}</li><li>{t("Use a border or tonal shift before introducing a shadow.")}</li><li>{t("Let nearby controls share a toolbar; keep global actions outside it.")}</li><li>{t("Use the grid to align information, not to decorate empty space.")}</li></ul></SignalPanel>
                 <SignalPanel interactive={false} tone="quiet" className="p-6"><p className="font-mono text-xs uppercase tracking-[0.18em] text-red-300">{t("Avoid")}</p><ul className="mt-5 space-y-3 text-sm leading-6 text-neutral-300"><li>{t("Nested translucent cards that create no new hierarchy.")}</li><li>{t("Permanent red glow across every surface or metric.")}</li><li>{t("Entrance motion for content users are repeatedly scanning.")}</li><li>{t("Forcing desktop card density onto a narrow viewport.")}</li></ul></SignalPanel>
               </div>
-              <SignalPanel interactive={false} tone="command" className="p-6">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"><div><SignalChip tone="signal">{t("Adoption checklist")}</SignalChip><p className="mt-4 text-xl font-medium tracking-tight text-white">{t("Copy tokens, then primitives, then patterns.")}</p><p className="mt-2 max-w-xl text-sm leading-6 text-neutral-400">{t("Do not start by copying a finished dashboard. First establish the color, type, spacing, focus, and state contracts that make components interoperable.")}</p></div><ol className="space-y-2 font-mono text-xs leading-6 text-neutral-400"><li><span className="mr-3 text-red-400">01</span>{t("Import tokens.css into the application stylesheet.")}</li><li><span className="mr-3 text-red-400">02</span>{t("Move only the primitives required by the product.")}</li><li><span className="mr-3 text-red-400">03</span>{t("Validate keyboard, reduced-motion, and small-screen behavior.")}</li><li><span className="mr-3 text-red-400">04</span>{t("Compose a new pattern only when hierarchy changes.")}</li></ol></div>
-              </SignalPanel>
+              <SignalSectionHeading eyebrow={adoption.eyebrow} title={adoption.title} description={adoption.description} />
+              <div className="grid gap-4 xl:grid-cols-2">
+                <SignalPanel interactive={false} tone="command" className="min-w-0 p-6">
+                  <div className="flex items-start justify-between gap-4"><div><p className="font-mono text-xs uppercase tracking-[0.18em] text-red-400">01 / {adoption.componentLabel}</p><h3 className="mt-4 text-xl font-medium tracking-tight text-white">{adoption.componentTitle}</h3></div><Layers3 className="mt-1 h-5 w-5 shrink-0 text-red-300" /></div>
+                  <p className="mt-3 text-sm leading-6 text-neutral-400">{adoption.componentDescription}</p>
+                  <ol className="mt-6 space-y-3 text-sm leading-6 text-neutral-300">{adoption.componentSteps.map((step, index) => <li key={step}><span className="mr-3 font-mono text-xs text-red-400">0{index + 1}</span>{step}</li>)}</ol>
+                  <div className="mt-6 overflow-hidden rounded-xl border border-white/[0.07]"><CodeBlock language="bash" label="SHELL" code={`npm install @mikkoayaka/signalframe`} /></div>
+                  <div className="mt-3 overflow-hidden rounded-xl border border-white/[0.07]"><CodeBlock language="css" label="SRC / INDEX.CSS" code={`@import "tailwindcss";\n@source "../node_modules/@mikkoayaka/signalframe/lib";\n@import "@mikkoayaka/signalframe/tokens.css";`} /></div>
+                  <div className="mt-3 overflow-hidden rounded-xl border border-white/[0.07]"><CodeBlock label="TSX" code={`import { SignalPanel, SignalToolbar } from "@mikkoayaka/signalframe";`} /></div>
+                </SignalPanel>
+                <SignalPanel interactive={false} tone="quiet" className="min-w-0 p-6">
+                  <div className="flex items-start justify-between gap-4"><div><p className="font-mono text-xs uppercase tracking-[0.18em] text-red-400">02 / {adoption.skillLabel}</p><h3 className="mt-4 text-xl font-medium tracking-tight text-white">{adoption.skillTitle}</h3></div><Command className="mt-1 h-5 w-5 shrink-0 text-red-300" /></div>
+                  <p className="mt-3 text-sm leading-6 text-neutral-400">{adoption.skillDescription}</p>
+                  <ol className="mt-6 space-y-3 text-sm leading-6 text-neutral-300">{adoption.skillSteps.map((step, index) => <li key={step}><span className="mr-3 font-mono text-xs text-red-400">0{index + 1}</span>{step}</li>)}</ol>
+                  <div className="mt-6 overflow-hidden rounded-xl border border-white/[0.07]"><CodeBlock language="bash" label="SHELL" code={`# Codex\nmkdir -p "\${CODEX_HOME:-$HOME/.codex}/skills"\ncp -R ./skills/signalframe "\${CODEX_HOME:-$HOME/.codex}/skills/"\n\n# Claude Code\nmkdir -p .claude/skills\ncp -R ./skills/signalframe .claude/skills/`} /></div>
+                  <div className="mt-3 overflow-hidden rounded-xl border border-white/[0.07]"><CodeBlock language="bash" label="PROMPT" code={`Use $signalframe to refine the billing workspace. Preserve the existing product identity, make the primary decision obvious, and verify desktop, mobile, keyboard, and state behavior.`} /></div>
+                </SignalPanel>
+              </div>
             </DocSection>
 
             <footer className="flex flex-col gap-3 border-t border-white/[0.08] py-10 font-mono text-xs uppercase tracking-[0.16em] text-neutral-600 sm:flex-row sm:items-center sm:justify-between"><span>Signalframe / MikkoAyaka</span><span>{copy.footer}</span></footer>

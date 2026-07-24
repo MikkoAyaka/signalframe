@@ -37,11 +37,53 @@ Pull requests run the same production build without deploying, so broken documen
 - Foundations for color, type, spatial depth, motion, accessibility, and product decisions.
 - Source-owned React primitives and composition patterns.
 
-## Reuse in another React + Tailwind project
+## Adopt Signalframe
 
-1. Copy `src/design-system/` into the target project.
-2. Import `tokens.css` after Tailwind in the target global stylesheet.
-3. Copy only the primitives required by the product: `SignalPanel`, `SignalChip`, `SignalIconButton`, and `SignalSectionHeading`.
-4. Use the composition rules in the documentation site rather than copying a finished screen wholesale.
+Signalframe supports two complementary adoption paths. The documentation site explains both in English and Simplified Chinese.
 
-The primitives intentionally depend only on React and Tailwind utility classes. They do not require a runtime design-system provider or an external component library.
+### 1. React component package
+
+Install the public package in a React + Tailwind project:
+
+```bash
+npm install @mikkoayaka/signalframe
+```
+
+In a typical `src/index.css`, import Tailwind first, point Tailwind v4 at the distributed component classes, and then load the tokens:
+
+```css
+@import "tailwindcss";
+@source "../node_modules/@mikkoayaka/signalframe/lib";
+@import "@mikkoayaka/signalframe/tokens.css";
+```
+
+Import only the primitives a product needs:
+
+```tsx
+import { SignalPanel, SignalToolbar } from "@mikkoayaka/signalframe";
+```
+
+The package exports ESM React primitives, TypeScript declarations, and `tokens.css`. It expects React as a peer dependency. Add `motion/react` only when a product actually renders motion; `signalMotion` remains framework-neutral transition configuration.
+
+### 2. Agent skill
+
+The repository includes [`skills/signalframe/SKILL.md`](skills/signalframe/SKILL.md), an agent skill for applying Signalframe decisions during interface work. It directs an agent to inspect an existing interface, select only the needed primitives, preserve product identity unless a full restyle is requested, and validate hierarchy, responsive behavior, keyboard semantics, and motion.
+
+Copy `skills/signalframe/` to the directory your agent discovers, then start a new session:
+
+```bash
+# Codex
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R ./skills/signalframe "${CODEX_HOME:-$HOME/.codex}/skills/"
+
+# Claude Code
+mkdir -p .claude/skills
+cp -R ./skills/signalframe .claude/skills/
+```
+
+Then provide a concrete implementation objective, for example:
+
+```text
+Use $signalframe to refine the billing workspace. Preserve the existing product identity,
+make the primary decision obvious, and verify desktop, mobile, keyboard, and state behavior.
+```

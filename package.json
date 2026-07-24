@@ -1,20 +1,62 @@
 {
-  "name": "@mikkoayaka/signalframe-docs",
-  "private": true,
+  "name": "@mikkoayaka/signalframe",
   "version": "0.1.0",
   "type": "module",
+  "description": "A dark React interface system for high-signal products.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikkoAyaka/signalframe.git"
+  },
+  "homepage": "https://mikkoayaka.github.io/signalframe/",
+  "bugs": {
+    "url": "https://github.com/MikkoAyaka/signalframe/issues"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./tokens.css": "./lib/tokens.css"
+  },
+  "sideEffects": [
+    "./lib/tokens.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "tailwind",
+    "design-system",
+    "components",
+    "dark-ui"
+  ],
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 4174",
     "build": "vite build",
+    "build:package": "vite build --config vite.library.config.ts && tsc --project tsconfig.lib.json && node scripts/copy-package-assets.mjs",
+    "prepack": "npm run build:package",
     "preview": "vite preview --host 127.0.0.1 --port 4174"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "lucide-react": "^0.546.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
     "shiki": "^4.3.1",
+    "typescript": "^7.0.2",
     "vite": "^6.2.3"
   }
 }

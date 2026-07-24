@@ -2,13 +2,14 @@ import { createBundledHighlighter } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 import { useEffect, useState } from "react";
 
-type CodeLanguage = "tsx" | "css" | "json";
+type CodeLanguage = "tsx" | "css" | "json" | "bash";
 
 const createHighlighter = createBundledHighlighter({
   langs: {
     tsx: () => import("@shikijs/langs/tsx"),
     css: () => import("@shikijs/langs/css"),
     json: () => import("@shikijs/langs/json"),
+    bash: () => import("@shikijs/langs/bash"),
   },
   themes: {
     "github-dark-default": () => import("@shikijs/themes/github-dark-default"),
@@ -21,7 +22,7 @@ let highlighterPromise: ReturnType<typeof createHighlighter> | undefined;
 function getHighlighter() {
   highlighterPromise ??= createHighlighter({
     themes: ["github-dark-default"],
-    langs: ["tsx", "css", "json"],
+    langs: ["tsx", "css", "json", "bash"],
   });
 
   return highlighterPromise;
